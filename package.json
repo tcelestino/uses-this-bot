@@ -1,0 +1,35 @@
+{
+  "name": "@tcelestino/uses-this-bot",
+  "version": "1.0.0",
+  "description": "telegram bot to show interviews from usesthis.com",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "telegram",
+    "bot",
+    "usesthis",
+    "interviews"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tcelestino/uses-this-bot.git"
+  },
+  "author": "Tiago Celestino",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "5.9.0",
+    "eslint-config-airbnb-base": "13.1.0",
+    "eslint-plugin-import": "2.14.0"
+  },
+  "dependencies": {
+    "dotenv": "6.1.0",
+    "node-telegram-bot-api": "0.30.0",
+    "s": "0.1.1"
+  },
+  "bugs": {
+    "url": "https://github.com/tcelestino/uses-this-bot/issues"
+  },
+  "homepage": "https://github.com/tcelestino/uses-this-bot#readme"
+}
