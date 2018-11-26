@@ -4,6 +4,7 @@
   "description": "telegram bot to show interviews from usesthis.com",
   "main": "app.js",
   "scripts": {
+    "dev": "nodemon -w *.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -27,6 +28,7 @@
     "axios": "0.18.0",
     "dotenv": "6.1.0",
     "node-telegram-bot-api": "0.30.0",
+    "nodemon": "^1.18.6",
     "s": "0.1.1"
   },
   "bugs": {
