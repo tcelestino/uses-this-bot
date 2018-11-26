@@ -22,13 +22,13 @@
   "devDependencies": {
     "eslint": "5.9.0",
     "eslint-config-airbnb-base": "13.1.0",
-    "eslint-plugin-import": "2.14.0"
+    "eslint-plugin-import": "2.14.0",
+    "nodemon": "1.18.6"
   },
   "dependencies": {
     "axios": "0.18.0",
     "dotenv": "6.1.0",
     "node-telegram-bot-api": "0.30.0",
-    "nodemon": "^1.18.6",
     "s": "0.1.1"
   },
   "bugs": {
