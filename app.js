@@ -28,8 +28,11 @@ bot.onText(/\/all/, (msg) => {
 
     // eslint-disable-next-line no-plusplus
     for (let index = 0; index < interviews.length; index++) {
-      const view = `<b><a href='${interviews[index].url}'>${interviews[index].title}</a></b>`;
-      bot.sendMessage(msg.chat.id, view, { parse_mode: 'HTML', disable_web_page_preview: true });
+      // const view = `<b><a href='${interviews[index].url}'>${interviews[index].title}</a></b>`;
+      bot.sendPhoto(msg.chat.id, interviews[index].image, {
+        caption: `<strong>${interviews[index].title}</strong>\n${interviews[index].url}`,
+        parse_mode: 'HTML',
+      });
     }
   });
 });
