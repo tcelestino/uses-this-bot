@@ -36,3 +36,14 @@ bot.onText(/\/all/, (msg) => {
     }
   });
 });
+
+bot.onText(/\/last/, (msg) => {
+  axios.get(process.env.USESTHIS_JSON).then((response) => {
+    const interviews = content(response.data.items);
+
+    bot.sendPhoto(msg.chat.id, interviews[0].image, {
+      caption: `${interviews[0].title}\n${interviews[0].url}`,
+      parse_mode: 'HTML',
+    });
+  });
+});
