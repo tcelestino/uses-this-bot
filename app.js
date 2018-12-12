@@ -12,6 +12,7 @@ function content(interviews) {
   return interviews.map(interview => ({
     id: interview.id,
     title: interview.title,
+    summary: interview.summary,
     url: interview.url,
     image: interview.image,
     date_published: interview.date_published,
@@ -29,7 +30,7 @@ bot.onText(/\/all/, (msg) => {
 
     for (let index = 0; index < interviews.length; index += 1) {
       bot.sendPhoto(msg.chat.id, interviews[index].image, {
-        caption: `${interviews[index].title}\n${interviews[index].url}`,
+        caption: `${interviews[index].title} - ${interviews[index].summary}\n${interviews[index].url}`,
         parse_mode: 'HTML',
       });
     }
@@ -41,7 +42,7 @@ bot.onText(/\/last/, (msg) => {
     const interviews = content(response.data.items);
 
     bot.sendPhoto(msg.chat.id, interviews[0].image, {
-      caption: `${interviews[0].title}\n${interviews[0].url}`,
+      caption: `${interviews[0].title} - ${interviews[0].summary}\n${interviews[0].url}`,
       parse_mode: 'HTML',
     });
   });
