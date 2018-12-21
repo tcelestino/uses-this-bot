@@ -1,14 +1,11 @@
-process.env.NTBA_FIX_319 = 1;
-
 require('dotenv').config();
 
-const TelegramBot = require('node-telegram-bot-api');
+const Telegraf = require('telegraf');
 const axios = require('axios');
 
-const token = process.env.TELEGRAM_TOKEN;
-const bot = new TelegramBot(token, { polling: true });
+const bot = new Telegraf(process.env.TELEGRAM_TOKEN);
 
-function content(interviews) {
+function getInterviews(interviews) {
   return interviews.map(interview => ({
     id: interview.id,
     title: interview.title,
@@ -19,31 +16,36 @@ function content(interviews) {
   }));
 }
 
-bot.onText(/\/start/, (msg) => {
-  const wecolmeText = '<b>Welcome to @UsesThisBot</b>\nThis bot list the last interviews on usesthis.com website\n You can use this command to interactive:\n<b>-all: list the last interviews</b>\n<b>-last: show the last interview</b>';
-  bot.sendMessage(msg.chat.id, wecolmeText, { parse_mode: 'HTML' });
+function formatMediaGroup(interviews = []) {
+  return interviews.map(interview => ({
+    media: interview.image,
+    caption: `${interview.title} - ${interview.url}`,
+    type: 'photo',
+  }));
+}
+
+bot.start((context) => {
+  const wecolmeText = 'Welcome to @UsesThisBot\nThis bot list the last interviews on usesthis.com website\n You can use this command to interactive:\n-all: list the last interviews\n-last: show the last interview';
+
+  context.reply(wecolmeText);
 });
 
-bot.onText(/\/all/, (msg) => {
+bot.command('all', (context) => {
   axios.get(process.env.USESTHIS_JSON).then((response) => {
-    const interviews = content(response.data.items);
+    const interviews = formatMediaGroup(getInterviews(response.data.items));
 
-    for (let index = 0; index < interviews.length; index += 1) {
-      bot.sendPhoto(msg.chat.id, interviews[index].image, {
-        caption: `${interviews[index].title} - ${interviews[index].summary}\n${interviews[index].url}`,
-        parse_mode: 'HTML',
-      });
-    }
+    context.replyWithMediaGroup(interviews);
   });
 });
 
-bot.onText(/\/last/, (msg) => {
+bot.command('last', (context) => {
   axios.get(process.env.USESTHIS_JSON).then((response) => {
-    const interviews = content(response.data.items);
+    const interviews = getInterviews(response.data.items);
 
-    bot.sendPhoto(msg.chat.id, interviews[0].image, {
-      caption: `${interviews[0].title} - ${interviews[0].summary}\n${interviews[0].url}`,
-      parse_mode: 'HTML',
+    context.replyWithPhoto(interviews[0].image, {
+      caption: `${interviews[0].title} - ${interviews[0].url}`,
     });
   });
 });
+
+bot.startPolling();
