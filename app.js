@@ -19,7 +19,7 @@ function getInterviews(interviews) {
 function formatMediaGroup(interviews = []) {
   return interviews.map(interview => ({
     media: interview.image,
-    caption: `${interview.title} - ${interview.url}`,
+    caption: `${interview.title} - ${interviews[0].summary}\n${interview.url}`,
     type: 'photo',
   }));
 }
@@ -43,7 +43,7 @@ bot.command('last', (context) => {
     const interviews = getInterviews(response.data.items);
 
     context.replyWithPhoto(interviews[0].image, {
-      caption: `${interviews[0].title} - ${interviews[0].url}`,
+      caption: `${interviews[0].title} - ${interviews[0].summary}\n${interviews[0].url}`,
     });
   });
 });
