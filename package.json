@@ -20,14 +20,14 @@
   "author": "Tiago Celestino",
   "license": "MIT",
   "devDependencies": {
-    "eslint": "5.9.0",
+    "eslint": "5.11.0",
     "eslint-config-airbnb-base": "13.1.0",
     "eslint-plugin-import": "2.14.0",
-    "nodemon": "1.18.6"
+    "nodemon": "1.18.9"
   },
   "dependencies": {
     "axios": "0.18.0",
-    "dotenv": "6.1.0",
+    "dotenv": "6.2.0",
     "telegraf": "3.25.5"
   },
   "bugs": {
