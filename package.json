@@ -2,9 +2,10 @@
   "name": "@tcelestino/uses-this-bot",
   "version": "1.0.0",
   "description": "telegram bot to show interviews from usesthis.com",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "dev": "nodemon -w *.js",
+    "start": "node src/index.js",
+    "dev": "nodemon --watch src/*.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
