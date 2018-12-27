@@ -26,7 +26,7 @@ function formatMediaGroup(interviews = []) {
 function botCommand(command = '', callback) {
   bot.command(command, (context) => {
     axios.get(config.USES_THIS_JSON).then((response) => {
-      callback(context, response);
+      callback(context, response.data.items);
     }).catch((error) => {
       callback(error);
     });
@@ -40,35 +40,17 @@ bot.start((context) => {
 });
 
 botCommand('all', (context, response) => {
-  const interviews = formatMediaGroup(getInterviews(response.data.items));
+  const interviews = formatMediaGroup(getInterviews(response));
 
   context.replyWithMediaGroup(interviews);
 });
 
 botCommand('last', (context, response) => {
-  const interviews = getInterviews(response.data.items);
+  const interviews = getInterviews(response);
 
   context.replyWithPhoto(interviews[0].image, {
     caption: `${interviews[0].title} - ${interviews[0].summary}\n${interviews[0].url}`,
   });
 });
-
-// bot.command('all', (context) => {
-//   axios.get(config.USES_THIS_JSON).then((response) => {
-//     const interviews = formatMediaGroup(getInterviews(response.data.items));
-
-//     context.replyWithMediaGroup(interviews);
-//   });
-// });
-
-// bot.command('last', (context) => {
-//   axios.get(config.USES_THIS_JSON).then((response) => {
-//     const interviews = getInterviews(response.data.items);
-
-//     context.replyWithPhoto(interviews[0].image, {
-//       caption: `${interviews[0].title} - ${interviews[0].summary}\n${interviews[0].url}`,
-//     });
-//   });
-// });
 
 bot.startPolling();
