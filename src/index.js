@@ -1,9 +1,8 @@
-require('dotenv').config();
-
 const Telegraf = require('telegraf');
 const axios = require('axios');
+const config = require('./config');
 
-const bot = new Telegraf(process.env.TELEGRAM_TOKEN);
+const bot = new Telegraf(config.TELEGRAM_TOKEN);
 
 function getInterviews(interviews) {
   return interviews.map(interview => ({
@@ -19,9 +18,19 @@ function getInterviews(interviews) {
 function formatMediaGroup(interviews = []) {
   return interviews.map(interview => ({
     media: interview.image,
-    caption: `${interview.title} - ${interviews[0].summary}\n${interview.url}`,
+    caption: `${interview.title} - ${interview[0].summary}\n${interview.url}`,
     type: 'photo',
   }));
+}
+
+function botCommand(command = '', callback) {
+  bot.command(command, (context) => {
+    axios.get(config.USES_THIS_JSON).then((response) => {
+      callback(context, response.data.items);
+    }).catch((error) => {
+      callback(error);
+    });
+  });
 }
 
 bot.start((context) => {
@@ -30,21 +39,17 @@ bot.start((context) => {
   context.reply(wecolmeText);
 });
 
-bot.command('all', (context) => {
-  axios.get(process.env.USESTHIS_JSON).then((response) => {
-    const interviews = formatMediaGroup(getInterviews(response.data.items));
+botCommand('all', (context, response) => {
+  const interviews = formatMediaGroup(getInterviews(response));
 
-    context.replyWithMediaGroup(interviews);
-  });
+  context.replyWithMediaGroup(interviews);
 });
 
-bot.command('last', (context) => {
-  axios.get(process.env.USESTHIS_JSON).then((response) => {
-    const interviews = getInterviews(response.data.items);
+botCommand('last', (context, response) => {
+  const interviews = getInterviews(response);
 
-    context.replyWithPhoto(interviews[0].image, {
-      caption: `${interviews[0].title} - ${interviews[0].summary}\n${interviews[0].url}`,
-    });
+  context.replyWithPhoto(interviews[0].image, {
+    caption: `${interviews[0].title} - ${interviews[0].summary}\n${interviews[0].url}`,
   });
 });
 
