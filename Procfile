@@ -1,1 +1,1 @@
-web: node src/index
+worker: node src/index
