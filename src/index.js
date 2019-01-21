@@ -40,9 +40,10 @@ bot.start((context) => {
 });
 
 botCommand('all', (context, response) => {
-  const interviews = formatMediaGroup(getInterviews(response));
+  const interviews = getInterviews(response);
+  const allInterviewsFormat = formatMediaGroup(interviews);
 
-  context.replyWithMediaGroup(interviews);
+  //context.replyWithMediaGroup(interviews);
 });
 
 botCommand('last', (context, response) => {
