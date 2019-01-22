@@ -18,7 +18,7 @@ function getInterviews(interviews) {
 function formatMediaGroup(interviews = []) {
   return interviews.map(interview => ({
     media: interview.image,
-    caption: `${interview.title} - ${interview[0].summary}\n${interview.url}`,
+    caption: `${interview.title} - ${interview.summary}\n${interview.url}`,
     type: 'photo',
   }));
 }
