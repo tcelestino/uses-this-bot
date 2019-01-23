@@ -35,9 +35,17 @@ function botCommand(command = '', callback) {
 }
 
 bot.start((context) => {
-  const wecolmeText = 'Welcome to @UsesThisBot\nThis bot list the last interviews on usesthis.com website\n You can use this command to interactive:\n-all: list the last interviews\n-last: show the last interview';
+  const chatInformation = context.chat;
 
-  context.reply(wecolmeText);
+  logger.info('user information', {
+    user_id: chatInformation.id,
+    username: chatInformation.username,
+    name: `${chatInformation.first_name} ${chatInformation.last_name}`,
+  });
+
+  const welcomeText = 'Welcome to @UsesThisBot\nThis bot list interviews published in the usesthis.com website\n You can use these commands:\n-all: list the last interviews\n-last: show the last interview';
+
+  context.reply(welcomeText);
 });
 
 botCommand('all', (context, response) => {
