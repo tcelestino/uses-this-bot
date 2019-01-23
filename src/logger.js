@@ -1,12 +1,13 @@
-const winston = require('winston');
-const Elasticsearch = require('winston-elasticsearch');
+const { createLogger, format, transports } = require('winston');
 
-const esTransportOpts = {
-  level: 'info',
+const { combine, json, timestamp } = format;
 
-};
-const logger = winston.createLogger({
-  transports: [new Elasticsearch(esTransportOpts)],
+const logger = createLogger({
+  format: combine(
+    timestamp({ format: 'YYYY-MM-DD[T]HH:mm:ss.SSS[Z]' }),
+    json(),
+  ),
+  transports: [new transports.Console()],
 });
 
 module.exports = logger;
