@@ -1,6 +1,7 @@
 const Telegraf = require('telegraf');
 const axios = require('axios');
 const config = require('./config');
+const logger = require('./logger');
 
 const bot = new Telegraf(config.TELEGRAM_TOKEN);
 
