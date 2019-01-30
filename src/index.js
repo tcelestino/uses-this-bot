@@ -5,6 +5,22 @@ const logger = require('./logger');
 
 const bot = new Telegraf(config.TELEGRAM_TOKEN);
 
+function log(message = 'Log information', infos) {
+  /* eslint-disable camelcase */
+  const {
+    user_id,
+    user_name,
+    first_name,
+    last_name,
+  } = infos;
+
+  logger.info(message, {
+    userId: user_id,
+    username: user_name,
+    name: `${first_name} ${last_name}`,
+  });
+}
+
 function getInterviews(interviews) {
   return interviews.map(interview => ({
     id: interview.id,
@@ -35,13 +51,7 @@ function botCommand(command = '', callback) {
 }
 
 bot.start((context) => {
-  const chatInformation = context.chat;
-
-  logger.info('user information', {
-    user_id: chatInformation.id,
-    username: chatInformation.username,
-    name: `${chatInformation.first_name} ${chatInformation.last_name}`,
-  });
+  log(context.chat);
 
   const welcomeText = 'Welcome to @UsesThisBot\nThis bot list interviews published in the usesthis.com website\n You can use these commands:\n-all: list the last interviews\n-last: show the last interview';
 
