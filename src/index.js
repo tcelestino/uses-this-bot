@@ -1,8 +1,40 @@
 const Telegraf = require('telegraf');
 const axios = require('axios');
 const config = require('./config');
+const logger = require('./logger');
 
 const bot = new Telegraf(config.TELEGRAM_TOKEN);
+
+function log(message, infos, type = 'info') {
+  let dataInfo = {};
+
+  /* eslint-disable camelcase */
+  if (infos.chat) {
+    const {
+      id,
+      user_name,
+      first_name,
+      last_name,
+    } = infos.chat;
+
+    dataInfo = {
+      chatId: id,
+      username: user_name,
+      name: `${first_name} ${last_name}`,
+    };
+  } else {
+    dataInfo = infos;
+  }
+
+  switch (type) {
+    case 'error':
+      logger.error(message, dataInfo);
+      break;
+    default:
+      logger.info(message, dataInfo);
+      break;
+  }
+}
 
 function getInterviews(interviews) {
   return interviews.map(interview => ({
@@ -23,30 +55,37 @@ function formatMediaGroup(interviews = []) {
   }));
 }
 
-function botCommand(command = '', callback) {
+function botCommand(command, callback) {
   bot.command(command, (context) => {
-    axios.get(config.USES_THIS_JSON).then((response) => {
-      callback(context, response.data.items);
+    axios.get(config.USES_THIS_JSON).then((res) => {
+      callback(context, res.data.items);
     }).catch((error) => {
+      log('error json request', error, 'error');
       callback(error);
     });
   });
 }
 
 bot.start((context) => {
-  const wecolmeText = 'Welcome to @UsesThisBot\nThis bot list the last interviews on usesthis.com website\n You can use this command to interactive:\n-all: list the last interviews\n-last: show the last interview';
+  const welcomeText = 'Welcome to @UsesThisBot\nThis bot list interviews published in the usesthis.com website\n You can use these commands:\n-all: list the last interviews\n-last: show the last interview';
 
-  context.reply(wecolmeText);
+  log('start chat', context);
+
+  context.reply(welcomeText);
 });
 
 botCommand('all', (context, response) => {
   const interviews = formatMediaGroup(getInterviews(response));
+
+  log('list all interviews', context);
 
   context.replyWithMediaGroup(interviews);
 });
 
 botCommand('last', (context, response) => {
   const interviews = getInterviews(response);
+
+  log('last interview', context);
 
   context.replyWithPhoto(interviews[0].image, {
     caption: `${interviews[0].title} - ${interviews[0].summary}\n${interviews[0].url}`,
