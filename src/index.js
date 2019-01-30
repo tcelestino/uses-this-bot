@@ -5,17 +5,17 @@ const logger = require('./logger');
 
 const bot = new Telegraf(config.TELEGRAM_TOKEN);
 
-function log(message, context, type = 'info') {
+function log(message, infos, type = 'info') {
   let dataInfo = {};
 
   /* eslint-disable camelcase */
-  if (context.chat) {
+  if (infos.chat) {
     const {
       id,
       user_name,
       first_name,
       last_name,
-    } = context.chat;
+    } = infos.chat;
 
     dataInfo = {
       chatId: id,
@@ -23,7 +23,7 @@ function log(message, context, type = 'info') {
       name: `${first_name} ${last_name}`,
     };
   } else {
-    dataInfo = context;
+    dataInfo = infos;
   }
 
   switch (type) {
