@@ -8,19 +8,13 @@ const bot = new Telegraf(config.TELEGRAM_TOKEN);
 function log(message, infos, type = 'info') {
   let dataInfo = {};
 
-  /* eslint-disable camelcase */
   if (infos.chat) {
     const {
       id,
-      user_name,
-      first_name,
-      last_name,
     } = infos.chat;
 
     dataInfo = {
       chatId: id,
-      username: user_name,
-      name: `${first_name} ${last_name}`,
     };
   } else {
     dataInfo = infos;
