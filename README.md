@@ -1,9 +1,10 @@
 # UsesThisBot
 
+It is currently online on http://t.me/UsesThisBot
+
 ## Installation
 
 ## Usage
-
 
 ## Contributing
 
@@ -13,9 +14,6 @@
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request :D
 
-## To Do
-
-## Features
 
 ## Credits
 
