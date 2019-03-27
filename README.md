@@ -1,5 +1,7 @@
 # UsesThisBot
 
+> Telegram bot to list the last interviews published on [usesthis.com](https://usesthis.com) website.
+
 It is currently online on http://t.me/UsesThisBot
 
 ## Installation
