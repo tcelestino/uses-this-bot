@@ -74,10 +74,10 @@ bot.start((context) => {
   context.reply(welcomeText);
 });
 
-botCommand('all', (context, response) => {
+botCommand('latest', (context, response) => {
   const interviews = formatMediaGroup(getInterviews(response));
 
-  log('list all interviews', context);
+  log('list latest published interviews', context);
 
   context.replyWithMediaGroup(interviews);
 });
