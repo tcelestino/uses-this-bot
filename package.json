@@ -21,16 +21,16 @@
   "author": "Tiago Celestino",
   "license": "MIT",
   "devDependencies": {
-    "eslint": "5.11.0",
+    "eslint": "5.16.0",
     "eslint-config-airbnb-base": "13.1.0",
-    "eslint-plugin-import": "2.14.0",
-    "nodemon": "1.18.9"
+    "eslint-plugin-import": "2.18.2",
+    "nodemon": "1.19.1"
   },
   "dependencies": {
     "axios": "0.19.0",
-    "dotenv": "6.2.0",
+    "dotenv": "8.0.0",
     "telegraf": "3.26.0",
-    "winston": "3.1.0"
+    "winston": "3.2.1"
   },
   "bugs": {
     "url": "https://github.com/tcelestino/uses-this-bot/issues"
