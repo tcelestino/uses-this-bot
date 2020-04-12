@@ -86,4 +86,8 @@ botCommand('last', (context, response) => {
   });
 });
 
-bot.launch();
+bot.launch({
+  webhook: {
+    domain: 'https://uses-this-bot.tcelestino.now.sh',
+  },
+});

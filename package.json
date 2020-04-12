@@ -4,7 +4,7 @@
   "description": "telegram bot to show interviews from usesthis.com",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node index.js",
     "dev": "nodemon --watch *.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
