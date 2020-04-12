@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "name": "uses-this-bot",
   "env": {
     "TELEGRAM_TOKEN": "@telegram-token",
     "USESTHIS_JSON": "@feed"
