@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "env": {
+    "TELEGRAM_TOKEN": "@telegram-token",
+    "USESTHIS_JSON": "@feed"
+  },
+  "builds": [
+    {
+      "src": "app.js",
+      "use": "@now/node"
+    }
+  ]
+}

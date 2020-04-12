@@ -9,13 +9,7 @@ function log(message, infos, type = 'info') {
   let dataInfo = {};
 
   if (infos.chat) {
-    const {
-      id,
-    } = infos.chat;
-
-    dataInfo = {
-      chatId: id,
-    };
+    dataInfo = { chatId: infos.chat.id };
   } else {
     dataInfo = infos;
   }
