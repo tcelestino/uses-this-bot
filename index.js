@@ -1,3 +1,5 @@
+'use strict';
+
 const axios = require('axios');
 const express = require('express');
 const Telegraf = require('telegraf');
@@ -11,8 +13,9 @@ const bot = new Telegraf(config.TELEGRAM_TOKEN, {
 });
 
 const fetch = async () => {
-  const data = await axios.get(config.USES_THIS_JSON)
-    .then(res => res.data.items)
+  const data = await axios
+    .get(config.USES_THIS_JSON)
+    .then((res) => res.data.items)
     .catch((error) => {
       logger.error('error json request', error);
     });
@@ -20,14 +23,15 @@ const fetch = async () => {
   return data;
 };
 
-const formatMediaGroup = (interviews = []) => interviews.map(interview => ({
-  media: interview.image,
-  caption: `${interview.title} - ${interview.summary}\n${interview.url}`,
-  type: 'photo',
-}));
+const formatMediaGroup = (interviews = []) =>
+  interviews.map((interview) => ({
+    media: interview.image,
+    caption: `${interview.title} - ${interview.summary}\n${interview.url}`,
+    type: 'photo',
+  }));
 
 const formatReplyWithPhoto = (interviews = []) => {
-  const data = interviews.map(interview => ({
+  const data = interviews.map((interview) => ({
     image: interview.image,
     title: interview.title,
     summary: interview.summary,
@@ -44,7 +48,8 @@ bot.telegram.getMe().then((botInformations) => {
 });
 
 bot.start((context) => {
-  const welcomeText = 'Welcome to @UsesThisBot\nThis bot list interviews published in the usesthis.com website\n You can use these commands:\n-all: list the last interviews\n-last: show the last interview';
+  const welcomeText =
+    'Welcome to @UsesThisBot\nThis bot list interviews published in the usesthis.com website\n You can use these commands:\n-all: list the last interviews\n-last: show the last interview';
 
   logger.info('start chat');
 

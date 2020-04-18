@@ -1,3 +1,17 @@
 {
-    "extends": "airbnb-base"
+    "extends": ["airbnb-base", "plugin:prettier/recommended"],
+    "env": { "node": true },
+    "parserOptions": {
+      "ecmaVersion": 2017,
+      "sourceType": "script"
+      },
+    "rules": {
+      "indent": ["error", 2],
+      "no-non-null-assertion": "off",
+      "no-unused-vars": "error",
+      "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1 }],
+      "max-len": ["error", { "code": 120, "ignoreUrls": true, "ignoreStrings": true }],
+      "object-curly-newline": ["error",  { "consistent": true }],
+      "spaced-comment": ["error", "always", { "markers": ["/"] }]
+    }
 }
