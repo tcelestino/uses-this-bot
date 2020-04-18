@@ -4,7 +4,11 @@ const Telegraf = require('telegraf');
 const config = require('./config');
 const logger = require('./logger');
 
-const bot = new Telegraf(config.TELEGRAM_TOKEN);
+const bot = new Telegraf(config.TELEGRAM_TOKEN, {
+  telegram: {
+    webhookReply: false,
+  },
+});
 
 const fetch = async () => {
   const data = await axios.get(config.USES_THIS_JSON)
@@ -65,11 +69,20 @@ bot.command('latest', async (context) => {
   logger.info('show latest interviews');
 });
 
-bot.telegram.setWebhook(`${config.DOMAIN}/bot/secret`);
-
 const app = express();
-app.get('/', (req, res) => res.send('Uses This Bot'));
 app.use(bot.webhookCallback('/bot/secret'));
-app.listen(config.SERVER_PORT, () => {
+app.get('/', async (req, res) => {
+  await bot.telegram.setWebhook(`${config.DOMAIN}/bot/secret`);
+  res.send('Uses This Bot');
+});
+
+if (config.NODE_ENV === 'dev') {
+  logger.info('listening local');
+  bot.launch();
+
+  return;
+}
+
+app.listen(3000, () => {
   logger.info('server listening on port 3000!');
 });

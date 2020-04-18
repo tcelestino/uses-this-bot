@@ -5,4 +5,5 @@ module.exports = {
   USES_THIS_JSON: process.env.USESTHIS_JSON,
   DOMAIN: process.env.DOMAIN,
   SERVER_PORT: process.env.SERVER_PORT,
+  NODE_ENV: process.env.NODE_ENV,
 };
