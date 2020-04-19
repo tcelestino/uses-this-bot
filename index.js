@@ -49,7 +49,7 @@ bot.telegram.getMe().then((botInformations) => {
 
 bot.start((context) => {
   const welcomeText =
-    'Welcome to @UsesThisBot\nThis bot list interviews published in the usesthis.com website\n You can use these commands:\n-all: list the last interviews\n-last: show the last interview';
+    'Welcome to @UsesThisBot\nThis bot list interviews published in the usesthis.com website\n Uses commands:\n-latest: list the latest interviews\n-last: show the last interview';
 
   logger.info('start chat');
 
