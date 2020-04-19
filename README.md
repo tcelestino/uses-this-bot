@@ -1,14 +1,45 @@
-# UsesThisBot
+# Uses This Bot
 
-> Telegram bot to list the last interviews published on [usesthis.com](https://usesthis.com) website.
+> Telegram bot to list the interviews published on [usesthis.com](https://usesthis.com) website.
 
-It is currently online on http://t.me/UsesThisBot
+Use it: http://t.me/UsesThisBot
 
-## Installation
+## How to use
 
-## Usage
+At moment, you can use theses commands:
+
+- last - show the last interview
+- latest - show the five latest interviews
+
+## Development
+
+- [yarn](https://yarnpkg.com/)
+- [now](https://zeit.co/home)
+- [ngrok](https://ngrok.com/)
+
+Clone project `git@github.com:tcelestino/uses-this-bot.git`
+
+`cd uses-this-bot`;
+
+You need create a bot on Telegram. [Read it how to do it](https://core.telegram.org/bots).
+
+Rename `.env.example` file `.env` and set enviroments:
+
+- TELEGRAM_TOKEN - set Telegram bot Token
+- USESTHIS_JSON - https://usesthis.com/feed.json
+- DOMAIN - ngrok url (read below about it)
+- SERVER_PORT - set server local port
+- NODE_ENV - set as 'dev'
+
+`yarn && yarn dev`
+
+### Set ngrok tunnel
+
+Download [ngrok](https://ngrok.com/) (it's free, but limited). After that, start using `./ngrok http YOUR_SERVER_PORT`
 
 ## Contributing
+
+See in: https://github.com/tcelestino/uses-this-bot/projects/1
 
 1. Fork it!
 2. Create your feature branch: `git checkout -b my-new-feature`
@@ -20,6 +51,8 @@ It is currently online on http://t.me/UsesThisBot
 ## Credits
 
 [@tcelestino](https:/github.com/tcelestino)
+
+Feed data provided by [usesthis.com](https://usesthis.com)
 
 ## License
 
