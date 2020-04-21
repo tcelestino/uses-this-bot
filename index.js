@@ -76,9 +76,15 @@ bot.command('latest', async (context) => {
 
 const app = express();
 app.use(bot.webhookCallback('/bot/secret'));
-app.get('/', async (req, res) => {
-  await bot.telegram.setWebhook(`${config.DOMAIN}/bot/secret`);
+
+app.get('/', (req, res) => {
   res.send('Uses This Bot');
+});
+
+app.get('/bot/secret', async (req, res) => {
+  const url = `${config.DOMAIN}/bot/secret`;
+  await bot.telegram.setWebhook(url);
+  res.send(`webhook ${url}`);
 });
 
 if (config.NODE_ENV === 'dev') {
