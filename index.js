@@ -75,16 +75,15 @@ bot.command('latest', async (context) => {
 });
 
 const app = express();
-app.use(bot.webhookCallback('/bot/secret'));
+app.use(bot.webhookCallback('/secret'));
 
 app.get('/', (req, res) => {
   res.send('Uses This Bot');
 });
 
-app.get('/bot/secret', async (req, res) => {
-  const url = `${config.DOMAIN}/bot/secret`;
-  await bot.telegram.setWebhook(url);
-  res.send(`webhook ${url}`);
+app.get('/secret', async (req, res) => {
+  await bot.telegram.setWebhook(`${config.DOMAIN}/secret`);
+  res.send('webhook');
 });
 
 if (config.NODE_ENV === 'dev') {
@@ -94,6 +93,6 @@ if (config.NODE_ENV === 'dev') {
   return;
 }
 
-app.listen(3000, () => {
+app.listen(config.SERVER_PORT, () => {
   logger.info('server listening on port 3000!');
 });
