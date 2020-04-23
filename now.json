@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "alias": ["uses-this-bot.tcelestino.now.sh"],
   "env": {
     "TELEGRAM_TOKEN": "@telegram-token",
     "USESTHIS_JSON": "@feed",
