@@ -93,6 +93,6 @@ if (config.NODE_ENV === 'dev') {
   return;
 }
 
-app.listen(config.SERVER_PORT, () => {
+app.listen(3000, () => {
   logger.info('server listening on port 3000!');
 });
