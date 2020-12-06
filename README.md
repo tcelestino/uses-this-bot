@@ -6,7 +6,7 @@ Use it: http://t.me/UsesThisBot
 
 ## How to use
 
-At moment, you can use theses commands:
+At moment, you can use the commands:
 
 - last - show the last interview
 - latest - show the five latest interviews
@@ -23,13 +23,19 @@ Clone project `git@github.com:tcelestino/uses-this-bot.git`
 
 You need create a bot on Telegram. [Read it how to do it](https://core.telegram.org/bots).
 
+## Environment
+
 Rename `.env.example` file `.env` and set enviroments:
 
-- TELEGRAM_TOKEN - set Telegram bot Token
-- USESTHIS_JSON - https://usesthis.com/feed.json
-- DOMAIN - ngrok url (read below about it)
-- SERVER_PORT - set server local port
-- NODE_ENV - set as 'dev'
+| Variable | Description | Value       |
+|----------|-------------|-------------|
+| **TELEGRAM_TOKEN** | set Telegram bot Token | |
+| **USESTHIS_JSON** | url to use this website | https://usesthis.com/feed.json |
+| **DOMAIN** | ngrok url (development mode) |  |
+| **SERVER_PORT** | set local server port| 3000  |
+| **NODE_ENV** | set environment | dev |
+
+## Running project
 
 `yarn && yarn dev`
 
@@ -39,14 +45,13 @@ Download [ngrok](https://ngrok.com/) (it's free, but limited). After that, start
 
 ## Contributing
 
-See in: https://github.com/tcelestino/uses-this-bot/projects/1
+See backlog in https://github.com/tcelestino/uses-this-bot/projects/1
 
 1. Fork it!
 2. Create your feature branch: `git checkout -b my-new-feature`
 3. Commit your changes: `git commit -am 'Add some feature'`
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request :D
-
 
 ## Credits
 
